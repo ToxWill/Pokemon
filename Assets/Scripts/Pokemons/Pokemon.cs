@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,6 +19,8 @@ public class Pokemon
 
     public Dictionary<Stat, int> StatBoosts { get; private set; }
 
+    public Queue<string> StatusChanges { get; private set; } = new Queue<string>();
+
     public void Init()
     {
         // Generate Moves
@@ -36,14 +37,7 @@ public class Pokemon
         CalculateStats();
         HP = MaxHp;
 
-        StatBoosts = new Dictionary<Stat, int>()
-        {
-            {Stat.Attack, 0},
-            {Stat.Defense, 0},
-            {Stat.SpAttack, 0},
-            {Stat.SpDefense, 0},
-            {Stat.Speed, 0}
-        };
+        ResetStatBoost();
     }
 
     void CalculateStats()
@@ -56,6 +50,18 @@ public class Pokemon
         Stats.Add(Stat.Speed, Mathf.FloorToInt((Base.Speed * Level) / 100f) + 5);
 
         MaxHp = Mathf.FloorToInt((Base.Speed * Level) / 100f) + 10;
+    }
+
+    void ResetStatBoost()
+    {
+        StatBoosts = new Dictionary<Stat, int>()
+        {
+            {Stat.Attack, 0},
+            {Stat.Defense, 0},
+            {Stat.SpAttack, 0},
+            {Stat.SpDefense, 0},
+            {Stat.Speed, 0},
+        };
     }
 
     int GetStat(Stat stat)
@@ -83,24 +89,24 @@ public class Pokemon
 
             StatBoosts[stat] = Mathf.Clamp(StatBoosts[stat] + boost, -6, 6);
 
+            if (boost > 0)
+                StatusChanges.Enqueue($"{Base.Name}'s {stat} rose!");
+            else
+                StatusChanges.Enqueue($"{Base.Name}'s {stat} fell!");
+
             Debug.Log($"{stat} has been boosted to {StatBoosts[stat]}");
         }
     }
 
-    public int Attack { get { return GetStat(Stat.Attack); }
-    }
+    public int Attack { get { return GetStat(Stat.Attack); } }
     
-    public int Defense { get { return GetStat(Stat.Defense); }
-    }
+    public int Defense { get { return GetStat(Stat.Defense); } }
 
-    public int SpAttack { get { return GetStat(Stat.SpAttack); }
-    }
+    public int SpAttack { get { return GetStat(Stat.SpAttack); } }
     
-    public int SpDefense { get { return GetStat(Stat.SpDefense); }
-    }
+    public int SpDefense { get { return GetStat(Stat.SpDefense); } }
 
-    public int Speed { get { return GetStat(Stat.Speed); }
-    }
+    public int Speed { get { return GetStat(Stat.Speed); } }
 
     public int MaxHp { get; private set; }
 
@@ -111,7 +117,8 @@ public class Pokemon
         if (Random.value * 100F <= 6.25f)
             critical = 2f;
         
-        float type = TypeChart.GetEffectiveness(move.Base.Type, this.Base.Type1) *
+        float type = 
+            TypeChart.GetEffectiveness(move.Base.Type, this.Base.Type1) *
             TypeChart.GetEffectiveness(move.Base.Type, this.Base.Type2);
 
         var damageDetails = new DamageDetails()
@@ -143,6 +150,11 @@ public class Pokemon
     {
         int r = Random.Range(0, Moves.Count);
         return Moves[r];
+    }
+
+    public void OnBattleOver()
+    {
+        ResetStatBoost();
     }
 }
 
