@@ -21,6 +21,8 @@ public class Pokemon
 
     public Condition Status { get; private set; }
 
+    public int StatusTime { get; set; }
+
     public Queue<string> StatusChanges { get; private set; } = new Queue<string>();
 
     public bool HpChanged { get; set; }
@@ -141,13 +143,7 @@ public class Pokemon
         int damage = Mathf.FloorToInt(d * modifiers);
 
         UpdateHP(damage);
-        /*HP -= damage;
-        if (HP <= 0)
-        {
-            HP = 0;
-            damageDetails.Fainted = true;
-        }*/
-
+        
         return damageDetails;
     }
 
@@ -160,7 +156,13 @@ public class Pokemon
     public void SetStatus(ConditionID conditionId)
     {
         Status = ConditionsDB.Conditions[conditionId];
+        Status?.OnStart?.Invoke(this);
         StatusChanges.Enqueue($"{Base.Name} {Status.StartMessage}");
+    }
+
+    public void CureStatus()
+    {
+        Status = null;
     }
 
     public Move GetRandomMove()
@@ -169,6 +171,16 @@ public class Pokemon
         return Moves[r];
     }
 
+    public bool OnBeforeMove()
+    {
+        if (Status?.OnBeforeMove != null)
+        {
+            return Status.OnBeforeMove(this);
+        }
+
+        return true;
+    }
+    
     public void OnAfterTurn()
     {
         Status?.OnAfterTurn?.Invoke(this);
