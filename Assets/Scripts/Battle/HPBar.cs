@@ -19,6 +19,7 @@ public class HPBar : MonoBehaviour
         {
             curHp -= changeAmt * Time.deltaTime;
             health.transform.localScale = new Vector3(curHp, 1f);
+
             yield return null;
         }
 

@@ -9,12 +9,13 @@ public class BattleUnit : MonoBehaviour
 
     public bool IsPlayerUnit { get { return isPlayerUnit; } }
 
-    public BattleHud Hud { get {return hud;} }
-    
+    public BattleHud Hud { get {return hud;} }    
     public Pokemon Pokemon { get; set; }
 
     Image image;
+
     Vector3 originalPos;
+
     Color originalColor;
 
     private void Awake()
@@ -27,13 +28,14 @@ public class BattleUnit : MonoBehaviour
     public void Setup(Pokemon pokemon)
     {
         Pokemon = pokemon;
+
         if (isPlayerUnit)
             image.sprite = Pokemon.Base.BackSprite;
+
         else
             image.sprite = Pokemon.Base.FrontSprite;
 
         hud.SetData(pokemon);
-
         image.color = originalColor;
         PlayEnterAnimation();
     }
@@ -42,6 +44,7 @@ public class BattleUnit : MonoBehaviour
     {
         if (isPlayerUnit)
             image.transform.localPosition = new Vector3(-500, originalPos.y);
+
         else
             image.transform.localPosition = new Vector3(500f, originalPos.y);
 
@@ -53,6 +56,7 @@ public class BattleUnit : MonoBehaviour
         var sequence = DOTween.Sequence();
         if (isPlayerUnit)
             sequence.Append(image.transform.DOLocalMoveX(originalPos.x + 50f, 0.25f));
+
         else
             sequence.Append(image.transform.DOLocalMoveX(originalPos.x - 50f, 0.25f));
 

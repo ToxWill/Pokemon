@@ -25,70 +25,23 @@ public class PokemonBase : ScriptableObject
 
     [SerializeField] List<LearnableMove> learnableMoves;
 
-    public string Name
-    {
-        get { return _name; }
-    }
+    public string Name { get { return _name; } }
+    public string Description { get { return description; } }
 
-    public string Description 
-    {
-        get { return description; }
-    }
+    public Sprite FrontSprite { get { return frontSprite; } }
+    public Sprite BackSprite { get { return backSprite; } }
 
-    public Sprite FrontSprite 
-    {
-        get { return frontSprite; }
-    }
+    public PokemonType Type1 { get { return type1; } }
+    public PokemonType Type2 { get { return type2; } }
 
-    public Sprite BackSprite
-    {
-        get { return backSprite; }
-    }
+    public int MaxHp { get { return maxHp; } }
+    public int Attack { get { return attack; } }
+    public int Defense { get { return defense; } }
+    public int SpAttack { get { return spAttack; } }
+    public int SpDefense { get { return spDefense; } }
+    public int Speed { get { return speed; } }
 
-    public PokemonType Type1
-    {
-        get { return type1; }
-    }
-
-    public PokemonType Type2
-    {
-        get { return type2; }
-    }
-
-    public int MaxHp
-    {
-        get { return maxHp; }
-    }
-
-    public int Attack
-    {
-        get { return attack; }
-    }
-
-    public int Defense
-    {
-        get { return defense; }
-    }
-
-    public int SpAttack
-    {
-        get { return spAttack; }
-    }
-
-    public int SpDefense
-    {
-        get { return spDefense; }
-    }
-
-    public int Speed
-    {
-        get { return speed; }
-    }
-
-    public List<LearnableMove> LearnableMoves 
-    {
-        get { return learnableMoves; }
-    }
+    public List<LearnableMove> LearnableMoves { get { return learnableMoves; } }
 }
 
 [System.Serializable]
@@ -97,15 +50,9 @@ public class LearnableMove
     [SerializeField] MoveBase moveBase;
     [SerializeField] int level;
 
-    public MoveBase Base
-    {
-        get { return moveBase; }
-    }
+    public MoveBase Base { get { return moveBase; } }
 
-    public int Level
-    {
-        get { return level; }
-    }
+    public int Level { get { return level; } }
 }
 
 public enum PokemonType
@@ -176,7 +123,6 @@ public class TypeChart
 
         int row = (int)attackType - 1;
         int col = (int)defenseType - 1;
-
         return chart[row][col];
     }
 }

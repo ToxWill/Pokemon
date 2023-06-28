@@ -9,23 +9,21 @@ public class Pokemon
     [SerializeField] int level;
 
     public PokemonBase Base { get { return _base; } }
-    public int Level { get { return level; } }
 
+    public Condition Status { get; private set; }
+    public Condition VolatileStatus { get; private set; }
+
+    public Dictionary<Stat, int> Stats { get; private set; }
+    public Dictionary<Stat, int> StatBoosts { get; private set; }
+
+    public int Level { get { return level; } }
+    public int StatusTime { get; set; }
     public int HP { get; set; }
+    public int VolatileStatusTime { get; set; }
 
     public List<Move> Moves { get; set; }
 
-    public Dictionary<Stat, int> Stats { get; private set; }
-
-    public Dictionary<Stat, int> StatBoosts { get; private set; }
-
-    public Condition Status { get; private set; }
-
-    public int StatusTime { get; set; }
-
-    public Condition VolatileStatus { get; private set; }
-
-    public int VolatileStatusTime { get; set; }
+    public Move CurrentMove { get; set; }    
 
     public Queue<string> StatusChanges { get; private set; } = new Queue<string>();
 
@@ -48,7 +46,6 @@ public class Pokemon
 
         CalculateStats();
         HP = MaxHp;
-
         ResetStatBoost();
         Status = null;
         VolatileStatus = null;
@@ -62,7 +59,6 @@ public class Pokemon
         Stats.Add(Stat.SpAttack, Mathf.FloorToInt((Base.SpAttack * Level) / 100f) + 5);
         Stats.Add(Stat.SpDefense, Mathf.FloorToInt((Base.SpDefense * Level) / 100f) + 5);
         Stats.Add(Stat.Speed, Mathf.FloorToInt((Base.Speed * Level) / 100f) + 5);
-
         MaxHp = Mathf.FloorToInt((Base.Speed * Level) / 100f) + 10 + Level;
     }
 
@@ -90,6 +86,7 @@ public class Pokemon
 
         if (boost >= 0)
             statVal = Mathf.FloorToInt(statVal * boostValues[boost]);
+
         else
             statVal = Mathf.FloorToInt(statVal / boostValues[-boost]);
 
@@ -102,11 +99,11 @@ public class Pokemon
         {
             var stat = statBoost.stat;
             var boost = statBoost.boost;
-
             StatBoosts[stat] = Mathf.Clamp(StatBoosts[stat] + boost, -6, 6);
 
             if (boost > 0)
                 StatusChanges.Enqueue($"{Base.Name}'s {stat} rose!");
+
             else
                 StatusChanges.Enqueue($"{Base.Name}'s {stat} fell!");
 
@@ -114,22 +111,18 @@ public class Pokemon
         }
     }
 
-    public int Attack { get { return GetStat(Stat.Attack); } }
-    
+    public int Attack { get { return GetStat(Stat.Attack); } }    
     public int Defense { get { return GetStat(Stat.Defense); } }
-
-    public int SpAttack { get { return GetStat(Stat.SpAttack); } }
-    
+    public int SpAttack { get { return GetStat(Stat.SpAttack); } }    
     public int SpDefense { get { return GetStat(Stat.SpDefense); } }
-
     public int Speed { get { return GetStat(Stat.Speed); } }
-
     public int MaxHp { get; private set; }
 
 
     public DamageDetails TakeDamage(Move move, Pokemon attacker)
     {
         float critical = 1f;
+
         if (Random.value * 100F <= 6.25f)
             critical = 2f;
         
@@ -145,15 +138,12 @@ public class Pokemon
         };
 
         float attack = (move.Base.Category == MoveCategory.Special) ? attacker.SpAttack : attacker.Attack;
-        float defense = (move.Base.Category == MoveCategory.Special) ? SpDefense : Defense;
-        
+        float defense = (move.Base.Category == MoveCategory.Special) ? SpDefense : Defense;        
         float modifiers = Random.Range(0.85f, 1f) * type * critical;
         float a = (2 * attacker.Level + 10) / 250f;
         float d = a * move.Base.Power * ((float)attack / defense) + 2;
         int damage = Mathf.FloorToInt(d * modifiers);
-
-        UpdateHP(damage);
-        
+        UpdateHP(damage);        
         return damageDetails;
     }
 
@@ -165,7 +155,8 @@ public class Pokemon
 
     public void SetStatus(ConditionID conditionId)
     {
-        if (Status != null) return;
+        if (Status != null)
+            return;  
         
         Status = ConditionsDB.Conditions[conditionId];
         Status?.OnStart?.Invoke(this);
@@ -181,7 +172,8 @@ public class Pokemon
 
     public void SetVolatileStatus(ConditionID conditionId)
     {
-        if (VolatileStatus != null) return;
+        if (VolatileStatus != null)
+            return;
 
         VolatileStatus = ConditionsDB.Conditions[conditionId];
         VolatileStatus?.OnStart?.Invoke(this);
@@ -202,6 +194,7 @@ public class Pokemon
     public bool OnBeforeMove()
     {
         bool canPerformMove = true;
+
         if (Status?.OnBeforeMove != null)
         {
             if (!Status.OnBeforeMove(this))

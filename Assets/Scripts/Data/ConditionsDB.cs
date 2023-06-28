@@ -9,7 +9,6 @@ public class ConditionsDB
         {
             var conditionId = kvp.Key;
             var condition = kvp.Value;
-
             condition.Id = conditionId;
         }
     }
@@ -17,8 +16,7 @@ public class ConditionsDB
     public static Dictionary<ConditionID, Condition> Conditions { get; set; } = new Dictionary<ConditionID, Condition>()
     {
         {
-            ConditionID.psn,
-            new Condition()
+            ConditionID.psn, new Condition()
             {
                 Name = "Poison",
                 StartMessage = "has been poisoned",
@@ -31,8 +29,7 @@ public class ConditionsDB
         },
 
         {
-            ConditionID.brn,
-            new Condition()
+            ConditionID.brn, new Condition()
             {
                 Name = "Burn",
                 StartMessage = "has been burned",
@@ -45,8 +42,7 @@ public class ConditionsDB
         },
 
         {
-            ConditionID.par,
-            new Condition()
+            ConditionID.par, new Condition()
             {
                 Name = "Paralyzed",
                 StartMessage = "has benn paralyzed",
@@ -64,8 +60,7 @@ public class ConditionsDB
         },
 
         {
-            ConditionID.frz,
-            new Condition()
+            ConditionID.frz, new Condition()
             {
                 Name = "Freeze",
                 StartMessage = "has been frozen",
@@ -84,8 +79,7 @@ public class ConditionsDB
         },
 
         {
-            ConditionID.slp,
-            new Condition()
+            ConditionID.slp, new Condition()
             {
                 Name = "Sleep",
                 StartMessage = "has fallen asleep",
@@ -114,8 +108,7 @@ public class ConditionsDB
 
         // Volatile Status Condtions
         {
-            ConditionID.confusion,
-            new Condition()
+            ConditionID.confusion, new Condition()
             {
                 Name = "Confusion",
                 StartMessage = "has been confused",
@@ -125,6 +118,7 @@ public class ConditionsDB
                     pokemon.VolatileStatusTime = Random.Range(1, 5);
                     Debug.Log($"Will be confused for {pokemon.VolatileStatusTime} moves");
                 },
+
                 OnBeforeMove = (Pokemon pokemon) =>
                 {
                     if (pokemon.VolatileStatusTime <= 0)
@@ -133,6 +127,7 @@ public class ConditionsDB
                         pokemon.StatusChanges.Enqueue($"{pokemon.Base.Name} kicked out of confusion!");
                         return true;
                     }
+
                     pokemon.VolatileStatusTime--;
 
                     // 50% chance to do a move

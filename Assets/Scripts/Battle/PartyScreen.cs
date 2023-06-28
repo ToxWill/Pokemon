@@ -7,6 +7,7 @@ public class PartyScreen : MonoBehaviour
     [SerializeField] Text messageText;
 
     PartyMemberUI[] memberSlots;
+
     List<Pokemon> pokemons;
 
     public void Init()
@@ -22,6 +23,7 @@ public class PartyScreen : MonoBehaviour
         {
             if (i < pokemons.Count)
                 memberSlots[i].SetData(pokemons[i]);
+
             else
                 memberSlots[i].gameObject.SetActive(false);
         }
@@ -35,6 +37,7 @@ public class PartyScreen : MonoBehaviour
         {
             if (i == selectedMember)
                 memberSlots[i].SetSelected(true);
+
             else
                 memberSlots[i].SetSelected(false);
         }

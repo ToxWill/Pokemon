@@ -28,10 +28,8 @@ public class GameController : MonoBehaviour
         state = GameState.Battle;
         battleSystem.gameObject.SetActive(true);
         worldCamera.gameObject.SetActive(false);
-
         var playerParty = playerController.GetComponent<PokemonParty>();
         var wildPokemon = FindObjectOfType<MapArea>().GetComponent<MapArea>().GetRandomWildPokemon();
-
         battleSystem.StartBattle(playerParty, wildPokemon);
     }
 
@@ -45,12 +43,9 @@ public class GameController : MonoBehaviour
     private void Update()
     {
         if (state == GameState.FreeRoam)
-        {
             playerController.HandleUpdate();
-        }
+
         else if (state == GameState.Battle)
-        {
             battleSystem.HandleUpdate();
-        }
     }
 }

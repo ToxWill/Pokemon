@@ -13,7 +13,6 @@ public class PartyMemberUI : MonoBehaviour
     public void SetData(Pokemon pokemon)
     {
         _pokemon = pokemon;
-
         nameText.text = pokemon.Base.Name;
         levelText.text = "Lvl " + pokemon.Level;
         hpBar.SetHP((float)pokemon.HP / pokemon.MaxHp);
@@ -23,6 +22,7 @@ public class PartyMemberUI : MonoBehaviour
     {
         if (selected)
             nameText.color = highlightedColor;
+
         else
             nameText.color = Color.black;
     }

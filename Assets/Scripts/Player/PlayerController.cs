@@ -5,12 +5,14 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
+
     public LayerMask solidObjectsLayer;
     public LayerMask grassLayer;
 
     public event Action OnEncountered;
 
     private bool isMoving;
+
     private Vector2 input;
 
     private Animator animator;
@@ -28,7 +30,8 @@ public class PlayerController : MonoBehaviour
             input.y = Input.GetAxisRaw("Vertical");
 
             // remove diagonal movement
-            if (input.x != 0) input.y = 0;
+            if (input.x != 0)
+                input.y = 0;
 
             if (input != Vector2.zero)
             {
@@ -58,9 +61,7 @@ public class PlayerController : MonoBehaviour
         }
 
         transform.position = targetPos;
-
         isMoving = false;
-
         CheckForEncounters();
     }
 

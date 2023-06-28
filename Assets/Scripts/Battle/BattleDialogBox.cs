@@ -8,9 +8,7 @@ public class BattleDialogBox : MonoBehaviour
     [SerializeField] int lettersPerSecond;
 
     [SerializeField] Color highlightedColor;
-
-    [SerializeField] Text dialogText;
-    
+          
     [SerializeField] GameObject actionSelector;
     [SerializeField] GameObject moveSelector;
     [SerializeField] GameObject moveDetails;
@@ -18,6 +16,7 @@ public class BattleDialogBox : MonoBehaviour
     [SerializeField] List<Text> actionTexts;
     [SerializeField] List<Text> moveTexts;
 
+    [SerializeField] Text dialogText;
     [SerializeField] Text ppText;
     [SerializeField] Text typeText;
 
@@ -29,9 +28,11 @@ public class BattleDialogBox : MonoBehaviour
     public IEnumerator TypeDialog(string dialog)
     {
         dialogText.text = "";
+
         foreach (var letter in dialog.ToCharArray())
         {
             dialogText.text += letter;
+
             yield return new WaitForSeconds(1f/lettersPerSecond);
         }
 
@@ -60,6 +61,7 @@ public class BattleDialogBox : MonoBehaviour
         {
             if (i == selectedAction)
                 actionTexts[i].color = highlightedColor;
+
             else
                 actionTexts[i].color = Color.black;
         }
@@ -71,6 +73,7 @@ public class BattleDialogBox : MonoBehaviour
         {
             if (i == selectedMove)
                 moveTexts[i].color = highlightedColor;
+
             else
                 moveTexts[i].color = Color.black;
         }
@@ -85,6 +88,7 @@ public class BattleDialogBox : MonoBehaviour
         {
             if (i < moves.Count)
                 moveTexts[i].text = moves[i].Base.Name;
+
             else
                 moveTexts[i].text = "-";
         }

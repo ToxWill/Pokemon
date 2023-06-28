@@ -8,6 +8,7 @@ public class BattleHud : MonoBehaviour
     [SerializeField] Text nameText;
     [SerializeField] Text levelText;
     [SerializeField] Text statusText;
+
     [SerializeField] HPBar hpBar;
 
     [SerializeField] Color psnColor;
@@ -17,12 +18,12 @@ public class BattleHud : MonoBehaviour
     [SerializeField] Color frzColor;
 
     Pokemon _pokemon;
+
     Dictionary<ConditionID, Color> statusColors;
 
     public void SetData(Pokemon pokemon)
     {
         _pokemon = pokemon;
-
         nameText.text = pokemon.Base.Name;
         levelText.text = "Lvl " + pokemon.Level;
         hpBar.SetHP((float) pokemon.HP / pokemon.MaxHp);
@@ -43,9 +44,8 @@ public class BattleHud : MonoBehaviour
     void SetStatusText()
     {
         if (_pokemon.Status == null)
-        {
             statusText.text = "";
-        }
+
         else 
         {
             statusText.text = _pokemon.Status.Id.ToString().ToUpper();
