@@ -32,7 +32,6 @@ public class BattleDialogBox : MonoBehaviour
         foreach (var letter in dialog.ToCharArray())
         {
             dialogText.text += letter;
-
             yield return new WaitForSeconds(1f/lettersPerSecond);
         }
 
@@ -61,7 +60,6 @@ public class BattleDialogBox : MonoBehaviour
         {
             if (i == selectedAction)
                 actionTexts[i].color = highlightedColor;
-
             else
                 actionTexts[i].color = Color.black;
         }
@@ -73,7 +71,6 @@ public class BattleDialogBox : MonoBehaviour
         {
             if (i == selectedMove)
                 moveTexts[i].color = highlightedColor;
-
             else
                 moveTexts[i].color = Color.black;
         }
@@ -83,7 +80,6 @@ public class BattleDialogBox : MonoBehaviour
 
         if (move.PP == 0)
             ppText.color = Color.red;
-
         else
             ppText.color = Color.black;
     }
@@ -94,7 +90,6 @@ public class BattleDialogBox : MonoBehaviour
         {
             if (i < moves.Count)
                 moveTexts[i].text = moves[i].Base.Name;
-
             else
                 moveTexts[i].text = "-";
         }

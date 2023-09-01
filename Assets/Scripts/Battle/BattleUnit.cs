@@ -5,6 +5,7 @@ using DG.Tweening;
 public class BattleUnit : MonoBehaviour
 {
     [SerializeField] bool isPlayerUnit;
+
     [SerializeField] BattleHud hud;
 
     public bool IsPlayerUnit { get { return isPlayerUnit; } }
@@ -31,7 +32,6 @@ public class BattleUnit : MonoBehaviour
 
         if (isPlayerUnit)
             image.sprite = Pokemon.Base.BackSprite;
-
         else
             image.sprite = Pokemon.Base.FrontSprite;
 
@@ -44,7 +44,6 @@ public class BattleUnit : MonoBehaviour
     {
         if (isPlayerUnit)
             image.transform.localPosition = new Vector3(-500, originalPos.y);
-
         else
             image.transform.localPosition = new Vector3(500f, originalPos.y);
 
@@ -56,7 +55,6 @@ public class BattleUnit : MonoBehaviour
         var sequence = DOTween.Sequence();
         if (isPlayerUnit)
             sequence.Append(image.transform.DOLocalMoveX(originalPos.x + 50f, 0.25f));
-
         else
             sequence.Append(image.transform.DOLocalMoveX(originalPos.x - 50f, 0.25f));
 

@@ -28,6 +28,7 @@ public class SpriteAnimator
     public void HandleUpdate()
     {
         timer += Time.deltaTime;
+
         if (timer > frameRate)
         {
             currentFrame = (currentFrame + 1) % frames.Count;

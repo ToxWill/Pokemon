@@ -87,7 +87,6 @@ public class Pokemon
 
         if (boost >= 0)
             statVal = Mathf.FloorToInt(statVal * boostValues[boost]);
-
         else
             statVal = Mathf.FloorToInt(statVal / boostValues[-boost]);
 
@@ -104,7 +103,6 @@ public class Pokemon
 
             if (boost > 0)
                 StatusChanges.Enqueue($"{Base.Name}'s {stat} rose!");
-
             else
                 StatusChanges.Enqueue($"{Base.Name}'s {stat} fell!");
 

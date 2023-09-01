@@ -45,7 +45,6 @@ public class BattleHud : MonoBehaviour
     {
         if (_pokemon.Status == null)
             statusText.text = "";
-
         else 
         {
             statusText.text = _pokemon.Status.Id.ToString().ToUpper();

@@ -16,6 +16,7 @@ public class BattleSystem : MonoBehaviour
 
     BattleState state;
     BattleState? prevState;
+
     int currentAction;
     int currentMove;
     int currentMember;
@@ -85,7 +86,6 @@ public class BattleSystem : MonoBehaviour
 
             if (enemyMovePriority > playerMovePriority)
                 playerGoesFirst = false;
-
             else if (enemyMovePriority == playerMovePriority)
                 playerGoesFirst = playerUnit.Pokemon.Speed >= enemyUnit.Pokemon.Speed;
 
@@ -149,14 +149,12 @@ public class BattleSystem : MonoBehaviour
 
         if (CheckIfMoveHits(move, sourceUnit.Pokemon, targetUnit.Pokemon))
         {
-
             sourceUnit.PlayAttackAnimation();
             yield return new WaitForSeconds(1f);
             targetUnit.PlayHitAnimation();
 
             if (move.Base.Category == MoveCategory.Status)
                 yield return RunMoveEffects(move.Base.Effects, sourceUnit.Pokemon, targetUnit.Pokemon, move.Base.Target);
-
             else
             {
                 var damageDetails = targetUnit.Pokemon.TakeDamage(move, sourceUnit.Pokemon);
@@ -197,7 +195,6 @@ public class BattleSystem : MonoBehaviour
         {
             if (moveTarget == MoveTarget.Self)
                 source.ApplyBoosts(effects.Boosts);
-
             else
                 target.ApplyBoosts(effects.Boosts);
         }
@@ -247,13 +244,11 @@ public class BattleSystem : MonoBehaviour
 
         if (accuracy > 0)
             moveAccuracy *= boostValues[accuracy];
-
         else
             moveAccuracy /= boostValues[-accuracy];
 
         if (evasion > 0)
             moveAccuracy /= boostValues[evasion];
-
         else
             moveAccuracy *= boostValues[-evasion];
 
@@ -277,7 +272,6 @@ public class BattleSystem : MonoBehaviour
 
             if (nextPokemon != null)
                 OpenPartyScreen();
-
             else
                 BattleOver(false);
         }
