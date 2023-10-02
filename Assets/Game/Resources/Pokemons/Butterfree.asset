@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Butterfree
   description: 
-  frontSprite: {fileID: 21300000, guid: 8dd0409232165964da4a327a1a5acb76, type: 3}
+  frontSprite: {fileID: 21300000, guid: 17fac9038f82dc54fbba67025d9bec64, type: 3}
   backSprite: {fileID: 21300000, guid: 0e12fdb171be88f48ada22777506475f, type: 3}
   type1: 12
   type2: 10
