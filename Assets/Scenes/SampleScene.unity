@@ -1444,6 +1444,7 @@ MonoBehaviour:
   partyScreen: {fileID: 1234497823}
   playerImage: {fileID: 1345172525}
   trainerImage: {fileID: 1804197677}
+  pokeballSprite: {fileID: 7068290943589663666, guid: 775fe91b7b101554db9cb04ca3ad62ab, type: 3}
 --- !u!1 &734834569
 GameObject:
   m_ObjectHideFlags: 0
@@ -1549,7 +1550,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1104338919
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!1 &771104529
@@ -82918,7 +82919,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4217b729471114bb68780ab3c78f4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: CoolTrainer
+  _name: Travis
   sprite: {fileID: 21300000, guid: 0c0c17419d3e2954bb474f437f216667, type: 3}
   dialog:
     lines:
@@ -110000,7 +110001,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0f37bf3cf5680a64d863b5f155b2a597, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f109ec30fee3d734e800c8c43f96a3b1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -114820,7 +114821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c21c4cc0827b6ef4693ca620aae10157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Brendan
+  _name: Brendan
   sprite: {fileID: 21300000, guid: 96a705132322ecb4f9780dab67210ada, type: 3}
 --- !u!114 &2072349684
 MonoBehaviour:
@@ -114868,17 +114869,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pokemons:
-  - _base: {fileID: 11400000, guid: 79d3a1335d61e2e4ebeb5122b40413cb, type: 2}
-    level: 10
   - _base: {fileID: 11400000, guid: 423a40ed403a7fc4e9aef3b9b5345a38, type: 2}
-    level: 10
-  - _base: {fileID: 11400000, guid: 1113cf20066b7ab4e9361c130c63f7e5, type: 2}
     level: 10
   - _base: {fileID: 11400000, guid: 3b3d55a0da1e3ad41ac26c03507f3043, type: 2}
     level: 10
   - _base: {fileID: 11400000, guid: 8e9743895fb03ee4b84177daa3267c87, type: 2}
-    level: 10
-  - _base: {fileID: 11400000, guid: 55b79335a18fcb040b0e5f604942dac6, type: 2}
     level: 10
 --- !u!114 &2072349686
 MonoBehaviour:

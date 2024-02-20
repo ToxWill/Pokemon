@@ -3,7 +3,7 @@ using System.Collections;
 
 public class TrainerController : MonoBehaviour, Interactable
 {
-    [SerializeField] string name;
+    [SerializeField] string _name;
     [SerializeField] Sprite sprite;
     [SerializeField] Dialog dialog;
     [SerializeField] Dialog dialogAfterBattle;
@@ -51,9 +51,9 @@ public class TrainerController : MonoBehaviour, Interactable
     public IEnumerator TriggerTrainerBattle(PlayerController player)
     {
         // Show Exclamation
-        exclamation.SetActive(true);
+        Exclamation.SetActive(true);
         yield return new WaitForSeconds(0.5f);
-        exclamation.SetActive(false);
+        Exclamation.SetActive(false);
 
         // Walk towards the player
         var diff = player.transform.position - transform.position;
@@ -90,7 +90,8 @@ public class TrainerController : MonoBehaviour, Interactable
         fov.transform.eulerAngles = new Vector3(0f, 0f, angle);
     }
 
-    public string Name { get => name; }
+    public string Name { get => _name; }
 
     public Sprite Sprite { get => sprite; }
+    public GameObject Exclamation { get => Exclamation; set => Exclamation = value; }
 }

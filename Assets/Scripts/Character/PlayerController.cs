@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] string name;
+    [SerializeField] string _name;
     [SerializeField] Sprite sprite;
     
     public event Action OnEncountered;
@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public string Name { get => name; }
+    public string Name { get => _name; }
 
     public Sprite Sprite { get => sprite; }
 }
