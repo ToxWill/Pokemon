@@ -93,5 +93,5 @@ public class TrainerController : MonoBehaviour, Interactable
     public string Name { get => _name; }
 
     public Sprite Sprite { get => sprite; }
-    public GameObject Exclamation { get => Exclamation; set => Exclamation = value; }
+    public GameObject Exclamation { get => exclamation; set => exclamation = value; }
 }
