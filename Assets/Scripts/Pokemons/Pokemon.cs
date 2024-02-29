@@ -26,6 +26,7 @@ public class Pokemon
 
     public int Level { get { return level; } }
     public int StatusTime { get; set; }
+    public int Exp { get; set; }
     public int HP { get; set; }
     public int VolatileStatusTime { get; set; }
 
@@ -52,6 +53,7 @@ public class Pokemon
                 break;
         }
 
+        Exp = Base.GetExpForLevel(Level);
         CalculateStats();
         HP = MaxHp;
         StatusChanges = new Queue<string>();
