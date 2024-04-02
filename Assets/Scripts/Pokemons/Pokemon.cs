@@ -120,6 +120,17 @@ public class Pokemon
         }
     }
 
+    public bool CheckForLevelUp()
+    {
+        if (Exp > Base.GetExpForLevel(level + 1))
+        {
+            ++level;
+            return true;
+        }
+
+        return false;
+    }
+
     public int Attack { get { return GetStat(Stat.Attack); } }    
     public int Defense { get { return GetStat(Stat.Defense); } }
     public int SpAttack { get { return GetStat(Stat.SpAttack); } }    
