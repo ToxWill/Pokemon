@@ -10,22 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7830adedfbce31b4facf7d2e19c5d0db, type: 3}
-  m_Name: Growl
+  m_Name: Flame Thrower
   m_EditorClassIdentifier: 
-  _name: Growl
+  _name: Flame Thrower
   description: 
-  type: 1
-  power: 0
+  type: 0
+  power: 90
   accuracy: 100
   alwaysHits: 0
-  pp: 40
+  pp: 15
   priority: 0
-  category: 2
+  category: 1
   effects:
-    boosts:
-    - stat: 0
-      boost: -1
+    boosts: []
     status: 0
     volatileStatus: 0
-  secondaries: []
+  secondaries:
+  - boosts: []
+    status: 2
+    volatileStatus: 0
+    chance: 10
+    target: 0
   target: 0
